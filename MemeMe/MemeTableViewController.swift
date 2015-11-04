@@ -11,6 +11,7 @@ import UIKit
 
 class MemeTableViewController: UITableViewController {
 
+    let cellIdentifier = "memeTableCell"
     
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
@@ -21,19 +22,27 @@ class MemeTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func configureTableView() {
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120.0
+        
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("memeTableCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemeTableViewCell
         let meme = memes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = meme.bottomText + "..." + meme.topText
-        cell.imageView!.image = meme.memedImage
         
+        cell.cellImage!.image = meme.memedImage
+        cell.cellText!.text  = "\(meme.topText!) ... \(meme.bottomText!)"
+               
         return cell
     }
     
@@ -52,12 +61,6 @@ class MemeTableViewController: UITableViewController {
         
         navigationController!.presentViewController(editController, animated: true, completion: nil)
     }
-    
-    
-    
-
-    
-    
     
 }
 

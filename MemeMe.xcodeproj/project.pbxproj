@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21061AF1BEA220100470152 /* MemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21061AE1BEA220100470152 /* MemeTableViewCell.swift */; };
 		D2736C741BE656BB00BE207E /* MemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2736C731BE656BB00BE207E /* MemeTableViewController.swift */; };
 		D2736C761BE656D000BE207E /* MemeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2736C751BE656D000BE207E /* MemeCollectionViewController.swift */; };
 		D284C5B41BE88892008821FB /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284C5B31BE88892008821FB /* MemeDetailViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D21061AE1BEA220100470152 /* MemeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTableViewCell.swift; sourceTree = "<group>"; };
 		D2736C731BE656BB00BE207E /* MemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTableViewController.swift; sourceTree = "<group>"; };
 		D2736C751BE656D000BE207E /* MemeCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewController.swift; sourceTree = "<group>"; };
 		D284C5B31BE88892008821FB /* MemeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D21061AB1BEA1C8B00470152 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2736C751BE656D000BE207E /* MemeCollectionViewController.swift */,
+				D2736C731BE656BB00BE207E /* MemeTableViewController.swift */,
+				D284C5B31BE88892008821FB /* MemeDetailViewController.swift */,
+				D2955FDC1BD51DA200D7EDFB /* MemeEditorViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D21061AC1BEA1C9700470152 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D284C5B51BE8A0D9008821FB /* MemeCollectionViewCell.swift */,
+				D21061AE1BEA220100470152 /* MemeTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D21061AD1BEA1C9E00470152 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2DBD1D91BE2761100CA7EFF /* Meme.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		D2955FCE1BD51DA200D7EDFB = {
 			isa = PBXGroup;
 			children = (
@@ -107,17 +137,14 @@
 		D2955FD91BD51DA200D7EDFB /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				D21061AD1BEA1C9E00470152 /* Model */,
+				D21061AC1BEA1C9700470152 /* View */,
+				D21061AB1BEA1C8B00470152 /* Controller */,
 				D2955FDA1BD51DA200D7EDFB /* AppDelegate.swift */,
-				D2955FDC1BD51DA200D7EDFB /* MemeEditorViewController.swift */,
 				D2955FDE1BD51DA200D7EDFB /* Main.storyboard */,
-				D284C5B51BE8A0D9008821FB /* MemeCollectionViewCell.swift */,
-				D2DBD1D91BE2761100CA7EFF /* Meme.swift */,
 				D2955FE11BD51DA200D7EDFB /* Assets.xcassets */,
 				D2955FE31BD51DA200D7EDFB /* LaunchScreen.storyboard */,
 				D2955FE61BD51DA200D7EDFB /* Info.plist */,
-				D284C5B31BE88892008821FB /* MemeDetailViewController.swift */,
-				D2736C731BE656BB00BE207E /* MemeTableViewController.swift */,
-				D2736C751BE656D000BE207E /* MemeCollectionViewController.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -272,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2DBD1DA1BE2761100CA7EFF /* Meme.swift in Sources */,
+				D21061AF1BEA220100470152 /* MemeTableViewCell.swift in Sources */,
 				D2955FDD1BD51DA200D7EDFB /* MemeEditorViewController.swift in Sources */,
 				D2736C761BE656D000BE207E /* MemeCollectionViewController.swift in Sources */,
 				D284C5B41BE88892008821FB /* MemeDetailViewController.swift in Sources */,

@@ -216,6 +216,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return keyboardSize.CGRectValue().height
     }
     
-    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }
 

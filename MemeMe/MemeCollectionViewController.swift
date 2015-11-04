@@ -16,8 +16,6 @@ class MemeCollectionViewController: UICollectionViewController {
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +59,9 @@ class MemeCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath)
     {
         
-        //let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("VillainDetailViewController") as! VillainDetailViewController
-        //detailController.villain = self.allVillains[indexPath.row]
-        //self.navigationController!.pushViewController(detailController, animated: true)
+        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailController.selectedMeme = memes[indexPath.row]
+        navigationController!.pushViewController(detailController, animated: true)
         
     }
     

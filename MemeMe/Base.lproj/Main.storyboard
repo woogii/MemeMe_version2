@@ -32,22 +32,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="memeTableCell" textLabel="Yss-T2-III" rowHeight="76" style="IBUITableViewCellStyleDefault" id="GLv-vS-jyT">
-                                <rect key="frame" x="0.0" y="92" width="320" height="76"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="memeTableCell" rowHeight="120" id="GLv-vS-jyT" customClass="MemeTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GLv-vS-jyT" id="GYT-QK-SNM">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yss-T2-III">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="75"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rc8-0G-hqq">
+                                            <rect key="frame" x="120" y="5" width="193" height="77"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdK-wY-f0M">
+                                            <rect key="frame" x="8" y="-6" width="104" height="99"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="99" id="VUK-c2-aRT"/>
+                                                <constraint firstAttribute="width" constant="104" id="mEw-fH-R1c"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="hdK-wY-f0M" id="dVq-y2-JhE"/>
+                                    <outlet property="cellText" destination="Rc8-0G-hqq" id="sxY-yp-rPy"/>
+                                    <outlet property="imageView" destination="hdK-wY-f0M" id="Rrg-iR-xD9"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -82,15 +92,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EeK-cx-mkJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EeK-cx-mkJ">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="P5z-ku-FN0"/>
                                     <constraint firstAttribute="height" constant="64" id="kIb-aq-u7c"/>
                                 </constraints>
                                 <items>
                                     <navigationItem title="Title" id="rTo-ui-wme">
-                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="QDV-gh-BHY"/>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="QDV-gh-BHY"/>
                                     </navigationItem>
                                 </items>
                                 <variation key="default">
