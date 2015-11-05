@@ -10,8 +10,10 @@ import UIKit
 
 class MemeTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var customImage: UIImageView!
+    
     @IBOutlet weak var cellText: UILabel!
+    
     
     
 }

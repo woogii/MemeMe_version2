@@ -20,14 +20,46 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
     var memedImage:UIImage!
+    var topText:String!
+    var bottomText:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        prepareEdit()
+    }
+    
+    func prepareEdit() {
+        
+        if let memedImage = memedImage {
+            imagePickerView.image = memedImage
+            lowerTextField.text = topText
+            upperTextField.text = bottomText
+            shareButton.enabled = true
+        }
+        else {
+            shareButton.enabled = false
+        }
+        
+        
         prepareTextField(lowerTextField)
         prepareTextField(upperTextField)
         
-        shareButton.enabled = false
+//        let memeTextAttributes = [
+//            NSStrokeColorAttributeName : UIColor.blackColor(),              // describe outline color
+//            NSForegroundColorAttributeName : UIColor.whiteColor(),          // specify the color of the text
+//            NSBackgroundColorAttributeName: UIColor .clearColor(),
+//            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+//            NSStrokeWidthAttributeName : -3.0                              // specify negative values to stroke and fill the text
+//        ]
+//        
+//        lowerTextField.delegate = self
+//        lowerTextField.defaultTextAttributes = memeTextAttributes
+//        lowerTextField.textAlignment = .Center
+//        upperTextField.delegate = self
+//        upperTextField.defaultTextAttributes = memeTextAttributes
+//        upperTextField.textAlignment = .Center
+    
     }
     
     func prepareTextField(textField:UITextField) {
@@ -49,6 +81,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
+        
+        
         
     }
     

@@ -25,7 +25,7 @@ class MemeTableViewController: UITableViewController {
     func configureTableView() {
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120.0
+        tableView.estimatedRowHeight = 160.0
         
     }
     
@@ -40,9 +40,9 @@ class MemeTableViewController: UITableViewController {
         
         // Set the name and image
         
-        cell.cellImage!.image = meme.memedImage
+        cell.customImage!.image = meme.memedImage
         cell.cellText!.text  = "\(meme.topText!) ... \(meme.bottomText!)"
-               
+       
         return cell
     }
     
