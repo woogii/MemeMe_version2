@@ -12,6 +12,9 @@ import UIKit
 class MemeCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var flowLayout:UICollectionViewFlowLayout!
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
     
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
@@ -22,14 +25,14 @@ class MemeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let space: CGFloat = 3.0
-        let dimension1 = (self.view.frame.size.width - (2*space))/3.0
-
-        let dimension2 = (self.view.frame.size.height - (100*space))/3.0
-
-        flowLayout.minimumInteritemSpacing = space  // the minimum spacing to use between items in the same row
-        flowLayout.minimumLineSpacing = space      //minimum spacing to use between lines of items in the grid.
-        flowLayout.itemSize = CGSizeMake(dimension1, dimension2)        // the default size to use for cells
+        screenSize = UIScreen.mainScreen().bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        flowLayout.itemSize = CGSize(width: screenWidth/3-2, height: screenWidth/3)
+        flowLayout.minimumInteritemSpacing = 1.0 // the minimum spacing to use between items in the same row
+        flowLayout.minimumLineSpacing = 1.0 //minimum spacing to use between lines of items in the grid.
     }
     
     

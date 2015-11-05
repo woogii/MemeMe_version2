@@ -120,7 +120,7 @@
                                     </mask>
                                 </variation>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9d-ho-NUB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t9d-ho-NUB">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </imageView>
                         </subviews>
@@ -130,8 +130,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="EeK-cx-mkJ" secondAttribute="trailing" constant="-20" id="56y-L7-42g"/>
                             <constraint firstItem="EeK-cx-mkJ" firstAttribute="top" secondItem="taF-aC-hSd" secondAttribute="topMargin" id="EOT-qP-IIM"/>
                             <constraint firstItem="EeK-cx-mkJ" firstAttribute="leading" secondItem="taF-aC-hSd" secondAttribute="leadingMargin" constant="-20" id="Qrf-fa-PUh"/>
+                            <constraint firstItem="vPd-TP-d2K" firstAttribute="top" secondItem="t9d-ho-NUB" secondAttribute="bottom" id="amD-bz-s4V"/>
+                            <constraint firstItem="t9d-ho-NUB" firstAttribute="leading" secondItem="taF-aC-hSd" secondAttribute="leading" id="gcE-xe-O3d"/>
                             <constraint firstItem="vPd-TP-d2K" firstAttribute="top" secondItem="EeK-cx-mkJ" secondAttribute="bottom" constant="504" id="kp5-94-HCa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EeK-cx-mkJ" secondAttribute="trailing" constant="-20" id="pXz-wQ-av6"/>
+                            <constraint firstAttribute="trailing" secondItem="t9d-ho-NUB" secondAttribute="trailing" id="rjH-T9-Agl"/>
+                            <constraint firstItem="t9d-ho-NUB" firstAttribute="top" secondItem="EeK-cx-mkJ" secondAttribute="bottom" id="uKE-Zs-QAc"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
