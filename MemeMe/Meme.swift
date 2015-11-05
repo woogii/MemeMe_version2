@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
 import UIKit
-
 
 struct Meme {
     var bottomText:String!

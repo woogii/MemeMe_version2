@@ -23,6 +23,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var memedImage:UIImage!
     var topText:String!
     var bottomText:String!
+  
+// MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         prepareEdit()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated:Bool){
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+
     func prepareEdit() {
         
         if let memedImage = memedImage {
@@ -62,18 +75,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.textAlignment = .Center
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        subscribeToKeyboardNotifications()
-    }
+// MARK: - Image processing methods
     
-    override func viewWillDisappear(animated:Bool){
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
-    }
-    
- 
     func save() {
         //create the meme object
         let meme = Meme( bottomText: lowerTextField.text!,
@@ -89,7 +92,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func generateMemedImage() -> UIImage
     {
-        
         // hide toolbar and navbar to avoid shown in the rendered image
         navBar.hidden = true
         toolBar.hidden = true
@@ -102,13 +104,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        
         // show toolbar and navbar
         navBar.hidden = false
         toolBar.hidden = false
         
         return memedImage
     }
+
+// MARK: - IBAction Methods
     
     @IBAction func pickAnImageFromCamera(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
@@ -150,6 +153,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     }
     
+// MARK: - UIImagePickerController delegate method
+    
     // tells the delegate that the user picked a still image or movie
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject])
@@ -165,6 +170,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+
+// MARK: - Delegate Methods
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -179,10 +186,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func textFieldDidBeginEditing(textField: UITextField) {
         // clear the text if it is not a default text, "TOP" or "BOTTOM"
-        if textField.text == "TOP" || textField.text == "BOTTOM"
-        {
+        if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
-            
         }
     }
     
@@ -195,6 +200,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     
     }
+
+// MARK: - Keyboard control
     
     func subscribeToKeyboardNotifications() {
         // notification posted immediately prior to the display of the keyboard
@@ -209,7 +216,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-    
     
     func keyboardWillShow(notification:NSNotification) {
         
@@ -231,9 +237,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
     }
-    
+
+// MARK: Control the status bar
     override func prefersStatusBarHidden() -> Bool {
-        return true
+        return true     // status bar should be hidden
     }
 }
 
