@@ -20,14 +20,23 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="okx-Lq-ufI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2015 wook2. All rights reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbM-ac-ZJ1">
+                                <rect key="frame" x="125" y="544" width="350" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZbM-ac-ZJ1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5TG-4z-K3L"/>
                             <constraint firstItem="okx-Lq-ufI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="D2o-qw-Jev"/>
                             <constraint firstAttribute="trailingMargin" secondItem="okx-Lq-ufI" secondAttribute="trailing" constant="-20" id="Gxp-DO-gpK"/>
+                            <constraint firstItem="ZbM-ac-ZJ1" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="524" id="L87-hY-WDE"/>
                             <constraint firstItem="okx-Lq-ufI" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="di8-Dy-DNM"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="okx-Lq-ufI" secondAttribute="bottom" id="mE5-1s-YWv"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ZbM-ac-ZJ1" secondAttribute="bottom" constant="35" id="mYS-6W-OB7"/>
                         </constraints>
                     </view>
                 </viewController>

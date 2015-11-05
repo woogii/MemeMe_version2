@@ -19,15 +19,25 @@ class MemeTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+       
         tableView.reloadData()
+        
     }
     
-    func configureTableView() {
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 160.0
-        
+    override func viewDidLoad() {
+        if( memes.count == 0) {
+            let     editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+            navigationController!.presentViewController(editController, animated: true, completion: nil)
+        }
+        else {
+                    super.viewDidLoad()
+        }
     }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count

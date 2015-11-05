@@ -19,6 +19,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
+    
     var memedImage:UIImage!
     var topText:String!
     var bottomText:String!
@@ -41,25 +42,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             shareButton.enabled = false
         }
         
-        
         prepareTextField(lowerTextField)
         prepareTextField(upperTextField)
         
-//        let memeTextAttributes = [
-//            NSStrokeColorAttributeName : UIColor.blackColor(),              // describe outline color
-//            NSForegroundColorAttributeName : UIColor.whiteColor(),          // specify the color of the text
-//            NSBackgroundColorAttributeName: UIColor .clearColor(),
-//            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-//            NSStrokeWidthAttributeName : -3.0                              // specify negative values to stroke and fill the text
-//        ]
-//        
-//        lowerTextField.delegate = self
-//        lowerTextField.defaultTextAttributes = memeTextAttributes
-//        lowerTextField.textAlignment = .Center
-//        upperTextField.delegate = self
-//        upperTextField.defaultTextAttributes = memeTextAttributes
-//        upperTextField.textAlignment = .Center
-    
     }
     
     func prepareTextField(textField:UITextField) {
@@ -81,9 +66,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
-        
-        
-        
     }
     
     override func viewWillDisappear(animated:Bool){

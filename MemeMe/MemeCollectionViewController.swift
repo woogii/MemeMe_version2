@@ -20,16 +20,21 @@ class MemeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let space: CGFloat = 3.0
-        let dimension1 = (self.view.frame.size.width - (2*space))/3.0
+        if ( memes.count == 0 ) {
+            let     editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+                    navigationController!.presentViewController(editController, animated: true, completion: nil)
+            
+        }
+        else {
+            let space: CGFloat = 3.0
+            let dimension1 = (self.view.frame.size.width - (2*space))/3.0
 
-        let dimension2 = (self.view.frame.size.height - (100*space))/3.0
+            let dimension2 = (self.view.frame.size.height - (100*space))/3.0
 
-        flowLayout.minimumInteritemSpacing = space  // the minimum spacing to use between items in the same row
-        flowLayout.minimumLineSpacing = space      //minimum spacing to use between lines of items in the grid.
-        flowLayout.itemSize = CGSizeMake(dimension1
-            , dimension2)        // the default size to use for cells
-        
+            flowLayout.minimumInteritemSpacing = space  // the minimum spacing to use between items in the same row
+            flowLayout.minimumLineSpacing = space      //minimum spacing to use between lines of items in the grid.
+            flowLayout.itemSize = CGSizeMake(dimension1, dimension2)        // the default size to use for cells
+        }
     }
     
     
