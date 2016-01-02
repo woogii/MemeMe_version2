@@ -20,6 +20,7 @@
 		D2955FF01BD51DA300D7EDFB /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2955FEF1BD51DA300D7EDFB /* MemeMeTests.swift */; };
 		D2955FFB1BD51DA300D7EDFB /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2955FFA1BD51DA300D7EDFB /* MemeMeUITests.swift */; };
 		D297DFB01C37BA30006B8323 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D297DFAF1C37BA30006B8323 /* CoreDataStackManager.swift */; };
+		D297DFB31C37DE38006B8323 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D297DFB11C37DE38006B8323 /* Model.xcdatamodeld */; };
 		D2DBD1DA1BE2761100CA7EFF /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DBD1D91BE2761100CA7EFF /* Meme.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		D2955FFA1BD51DA300D7EDFB /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		D2955FFC1BD51DA300D7EDFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D297DFAF1C37BA30006B8323 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		D297DFB21C37DE38006B8323 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D2DBD1D91BE2761100CA7EFF /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				D2DBD1D91BE2761100CA7EFF /* Meme.swift */,
+				D297DFB11C37DE38006B8323 /* Model.xcdatamodeld */,
 				D297DFAF1C37BA30006B8323 /* CoreDataStackManager.swift */,
 			);
 			name = Model;
@@ -308,6 +311,7 @@
 				D2736C761BE656D000BE207E /* MemeCollectionViewController.swift in Sources */,
 				D284C5B41BE88892008821FB /* MemeDetailViewController.swift in Sources */,
 				D284C5B61BE8A0D9008821FB /* MemeCollectionViewCell.swift in Sources */,
+				D297DFB31C37DE38006B8323 /* Model.xcdatamodeld in Sources */,
 				D2955FDB1BD51DA200D7EDFB /* AppDelegate.swift in Sources */,
 				D2736C741BE656BB00BE207E /* MemeTableViewController.swift in Sources */,
 			);
@@ -561,6 +565,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D297DFB11C37DE38006B8323 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D297DFB21C37DE38006B8323 /* Model.xcdatamodel */,
+			);
+			currentVersion = D297DFB21C37DE38006B8323 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D2955FCF1BD51DA200D7EDFB /* Project object */;
 }
