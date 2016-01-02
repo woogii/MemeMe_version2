@@ -14,7 +14,7 @@ class Meme : NSManagedObject {
     
     @NSManaged var bottomText:String
     @NSManaged var topText:String
-    @NSManaged var origimalImage:NSData
+    @NSManaged var originalImage:NSData
     @NSManaged var memedImage:NSData
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {

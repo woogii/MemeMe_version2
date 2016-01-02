@@ -17,7 +17,7 @@ import CoreData
  *
  */
 
-private let SQLITE_FILE_NAME = "event.sqlite"
+private let SQLITE_FILE_NAME = "Meme.sqlite"
 
 class CoreDataStackManager {
     
