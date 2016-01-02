@@ -42,6 +42,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
+    
+    lazy var sharedContext = {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
 
     func prepareEdit() {
         
@@ -79,11 +83,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func save() {
         //create the meme object
-        let meme = Meme( bottomText: lowerTextField.text!,
-            topText: upperTextField.text!,
-            originalImage:imagePickerView.image!,
-            memedImage: self.memedImage)
+        let meme = Meme(context: sharedContext)
         
+        meme.bottomText = lowerTextField.text!
+        meme.topText = upperTextField.text!
+        meme.origimalImage = UIImagePNGRepresentation(imagePickerView.image!)!
+        meme.memedImage = UIImagePNGRepresentation(self.memedImage)!
+        
+        //meme.origimalImage = imagePickerView.image!
+        //meme.memedImage = self.memedImage
+        
+
         // Add it to the memes array in the Application Delegate
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate

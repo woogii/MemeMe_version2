@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-
-class MemeTableViewController: UITableViewController {
+class MemeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     let cellIdentifier = "memeTableCell"
     var deletePlanetIndexPath: NSIndexPath? = nil
@@ -17,11 +17,49 @@ class MemeTableViewController: UITableViewController {
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
+    
+// MARK : - Convenience Method
+    lazy var sharedContext = {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
+    
+    lazy var fetchedResultController: NSFetchedResultsController = {
+       
+        let fetchRequest = NSFetchRequest(entityName: "Meme")
+        
+        let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        return fetchedResultController
+    }()
 
 // MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            print(error)
+        }
+        
+        // Set this view controller as the fetched results controller's delegate
+        fetchedResultController.delegate = self
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    // MARK : - NSFetchedResultsController Delegate 
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        // This invocation prepares the table to receive a number of changes. It will 
+        // store them up until it receives endUpdates(), and then perform tell all at once.
+        self.tableView.beginUpdates()
+    }
+    
+    // When endUpdates() is invoked, the table makes the changes visible.
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
     }
 
 // MARK: - Delegate Methods
@@ -32,6 +70,17 @@ class MemeTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        default:
+            return 
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
