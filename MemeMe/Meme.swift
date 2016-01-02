@@ -14,5 +14,5 @@ struct Meme {
     var topText:String!
     var originalImage:UIImage!
     var memedImage:UIImage!
-
+ 
 }
