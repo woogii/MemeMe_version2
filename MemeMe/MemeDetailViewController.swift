@@ -14,7 +14,7 @@ class MemeDetailViewController : UIViewController {
     @IBOutlet weak var detailImageView: UIImageView!
     
     
-// MARK: - View lifecycle
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +42,11 @@ class MemeDetailViewController : UIViewController {
         tabBarController?.tabBar.hidden = false
     }
     
-// MARK: - Action method
+    // MARK: - Action method
     
     func edit() {
         let editorController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        
         // Pass memed image info from DetailView to EditorView
         
         editorController.memedImage = UIImage(data: selectedMeme.originalImage)

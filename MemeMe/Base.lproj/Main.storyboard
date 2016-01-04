@@ -78,7 +78,6 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sent Memes" id="ak9-Cn-eIg">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="7nC-79-2cF"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hls-eG-Xfz">
                             <connections>
                                 <action selector="addMeme:" destination="AEb-VV-Qk9" id="PHS-LP-nvK"/>
@@ -238,6 +237,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="collectionView" destination="Wod-qk-8dP" id="B3M-eR-TUx"/>
                         <outlet property="flowLayout" destination="4Os-45-Aeg" id="tnF-g7-Sxy"/>
                     </connections>
                 </collectionViewController>

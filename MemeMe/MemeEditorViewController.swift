@@ -24,11 +24,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var topText:String!
     var bottomText:String!
   
-// MARK: - View lifecycle
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         prepareEdit()
     }
     
@@ -48,6 +48,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }()
 
     func prepareEdit() {
+        
+        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        self.view.addGestureRecognizer(tapGesture)
         
         if let memedImage = memedImage {
             imagePickerView.image = memedImage
@@ -79,27 +82,28 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.textAlignment = .Center
     }
 
-// MARK: - Image processing methods
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    // MARK: - Image processing methods
     
     func save() {
         //create the meme object
-        let meme = Meme(context: sharedContext)
+
+        let dictionary : [String:AnyObject] = [
+            "bottomText" : lowerTextField.text!,
+            "topText" : upperTextField.text!,
+            "originalImage" : imagePickerView.image!,
+            "memedImage" : self.memedImage!
+        ]
         
-        meme.bottomText = lowerTextField.text!
-        meme.topText = upperTextField.text!
-        meme.originalImage = UIImagePNGRepresentation(imagePickerView.image!)!
-        meme.memedImage = UIImagePNGRepresentation(self.memedImage)!
-        
-        //meme.origimalImage = imagePickerView.image!
-        //meme.memedImage = self.memedImage
+        _ = Meme(dictionary: dictionary, context: sharedContext)
         
         // Save image to the disk 
         CoreDataStackManager.sharedInstance().saveContext()
         
-        // Add it to the memes array in the Application Delegate
-        // let object = UIApplication.sharedApplication().delegate
-        // let appDelegate = object as! AppDelegate
-        // appDelegate.memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage
@@ -123,7 +127,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return memedImage
     }
 
-// MARK: - IBAction Methods
+    // MARK: - IBAction Methods
     
     @IBAction func pickAnImageFromCamera(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
@@ -165,7 +169,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     }
     
-// MARK: - UIImagePickerController delegate method
+    // MARK: - UIImagePickerController delegate method
     
     // tells the delegate that the user picked a still image or movie
     func imagePickerController(picker: UIImagePickerController,
@@ -175,7 +179,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             imagePickerView.image = image
             picker.dismissViewControllerAnimated(true, completion: nil)
         }
-        cancelButton.enabled = false
     }
     
     // tells the delegate that the user cancelled the pick operation
@@ -183,7 +186,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
-// MARK: - Delegate Methods
+    // MARK: - Delegate Methods
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -213,7 +216,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     }
 
-// MARK: - Keyboard control
+    // MARK: - Keyboard control
     
     func subscribeToKeyboardNotifications() {
         // notification posted immediately prior to the display of the keyboard
@@ -250,7 +253,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return keyboardSize.CGRectValue().height
     }
 
-// MARK: Control the status bar
+    // MARK: Control the status bar
     override func prefersStatusBarHidden() -> Bool {
         return true     // status bar should be hidden
     }
