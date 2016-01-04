@@ -75,14 +75,12 @@ class MemeCollectionViewController: UICollectionViewController, NSFetchedResults
     // MARK: - Delegate Methods
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // return self.fetchedResultController.sections?.count ?? 0
-        return 1 
+        return self.fetchedResultController.sections?.count ?? 0
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultController.sections![section]
         print("number Of Cells: \(sectionInfo.numberOfObjects)")
-        // return memes.count
         return sectionInfo.numberOfObjects
     }
     
@@ -113,55 +111,6 @@ class MemeCollectionViewController: UICollectionViewController, NSFetchedResults
         
         
     }
-    
-    // MARK : - Fetched Results Controller Delegate 
-    
-    // Whenever changes are made to Core Data the following three methods are invoked. This first method is used to create
-    // a fresh array to record the index paths that will be changed.
-//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-//        insertedIndexPaths = [NSIndexPath]()
-//        deletedIndexPaths = [NSIndexPath]()
-//        
-//        print("in controllerWillChangeContent")
-//    }
-//    
-//    // This method may be called multiple times, once for each meme object is added. 
-//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-//        
-//        print(newIndexPath?.row)
-//        
-//        switch type {
-//            
-//        case .Insert:
-//            insertedIndexPaths.append(newIndexPath!)
-//            print("Insert an item")
-//            break
-//        case .Delete:
-//            deletedIndexPaths.append(newIndexPath!)
-//            print("delete an item")
-//            break
-//        default:
-//            break
-//        }
-//    }
-//    
-//    // This method is invoked after all of the changed in the current batch have been collected into the index path array(insert).
-//    // We need to loop through the array and perform changes. 
-//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-//        
-//        print("in controllerDidChangeContent. changes.count : \(insertedIndexPaths.count)")
-//        
-//        collectionView?.performBatchUpdates({() -> Void in
-//            
-//            for indexPath in self.insertedIndexPaths{
-//                self.collectionView?.insertItemsAtIndexPaths([indexPath])
-//            }
-//            
-//            for indexPath in self.deletedIndexPaths{
-//                self.collectionView?.deleteItemsAtIndexPaths([indexPath])
-//            }
-//        }, completion: nil)
-//    }
     
     // MARK: - IBAction method
     

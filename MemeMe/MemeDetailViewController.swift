@@ -53,10 +53,10 @@ class MemeDetailViewController : UIViewController {
         editorController.bottomText = selectedMeme.topText
         editorController.topText    = selectedMeme.bottomText
         
+        
         presentViewController(editorController, animated: true, completion: {
             // Pops the top view controller, DetailViewController, from the navigation stack.
             self.navigationController!.popViewControllerAnimated(true)
-
         })
         
     }
