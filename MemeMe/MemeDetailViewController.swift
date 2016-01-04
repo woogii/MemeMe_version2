@@ -14,7 +14,7 @@ class MemeDetailViewController : UIViewController {
     @IBOutlet weak var detailImageView: UIImageView!
     
     
-// MARK: - View lifecycle
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,12 @@ class MemeDetailViewController : UIViewController {
 
         // Add 'edit' UIBarButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "edit")
+
+        // Convert NSData type to UIImage type
+        let memedImage = UIImage(data: selectedMeme.memedImage)
+
         // Pass image from TableView or CollectionView to DetailView
-        if let memedImage = selectedMeme.memedImage {
+        if let memedImage = memedImage {
             detailImageView.image = memedImage
         }
     }
@@ -38,19 +42,21 @@ class MemeDetailViewController : UIViewController {
         tabBarController?.tabBar.hidden = false
     }
     
-// MARK: - Action method
+    // MARK: - Action method
     
     func edit() {
         let editorController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        
         // Pass memed image info from DetailView to EditorView
-        editorController.memedImage = selectedMeme.originalImage
+        
+        editorController.memedImage = UIImage(data: selectedMeme.originalImage)
         editorController.bottomText = selectedMeme.topText
         editorController.topText    = selectedMeme.bottomText
+        
         
         presentViewController(editorController, animated: true, completion: {
             // Pops the top view controller, DetailViewController, from the navigation stack.
             self.navigationController!.popViewControllerAnimated(true)
-
         })
         
     }

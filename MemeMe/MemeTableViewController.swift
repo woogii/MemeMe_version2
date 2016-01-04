@@ -7,40 +7,96 @@
 //
 
 import UIKit
+import CoreData
 
-
-class MemeTableViewController: UITableViewController {
+class MemeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     let cellIdentifier = "memeTableCell"
     var deletePlanetIndexPath: NSIndexPath? = nil
     
-    var memes: [Meme] {
-        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
-    }
+    
+    // MARK : - Convenience Method
+    lazy var sharedContext = {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
+    
+    lazy var fetchedResultController: NSFetchedResultsController = {
+       
+        let fetchRequest = NSFetchRequest(entityName: "Meme")
+        
+        // Fetch request contain at least one sort descriptor to order the results
+        fetchRequest.sortDescriptors = []
+        
+        let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        return fetchedResultController
+    }()
 
-// MARK: - View lifecycle
+    // MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        // Set this view controller as the fetched results controller's delegate
+        fetchedResultController.delegate = self
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            print(error)
+        }
+        
         tableView.reloadData()
     }
+    
+    // MARK : - NSFetchedResultsController Delegate 
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        // This invocation prepares the table to receive a number of changes. It will 
+        // store them up until it receives endUpdates(), and then perform tell all at once.
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
 
-// MARK: - Delegate Methods
+    // When endUpdates() is invoked, the table makes the changes visible.
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+    }
+
+    // MARK: - Delegate Methods
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        let sectionInfo = self.fetchedResultController.sections![section]
+        // return memes.count
+        return sectionInfo.numberOfObjects
     }
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemeTableViewCell
-        let meme = memes[indexPath.row]
+        let meme = self.fetchedResultController.objectAtIndexPath(indexPath) as! Meme
         
-        cell.customImage!.image = meme.memedImage
-        cell.cellText!.text  = "\(meme.topText!) ... \(meme.bottomText!)"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemeTableViewCell
+                
+        cell.customImage!.image = UIImage(data: meme.memedImage)
+        cell.cellText!.text  = "\(meme.topText) ... \(meme.bottomText)"
        
         return cell
     }
@@ -49,7 +105,10 @@ class MemeTableViewController: UITableViewController {
         
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
 
-        detailController.selectedMeme = memes[indexPath.row]
+        let meme = self.fetchedResultController.objectAtIndexPath(indexPath) as! Meme
+        
+        // detailController.selectedMeme = memes[indexPath.row]
+        detailController.selectedMeme = meme
         navigationController!.pushViewController(detailController, animated: true)
         
     }
@@ -58,13 +117,14 @@ class MemeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
      
         if editingStyle == .Delete {
+            
             deletePlanetIndexPath = indexPath
             confirmDelete(deletePlanetIndexPath!)
         }
     }
 
     
-// MARK: - TableView delete
+    // MARK: - TableView delete
     
     // Confirms whether or not users want to delete the selected cell
     func confirmDelete(indexPath:NSIndexPath) {
@@ -85,18 +145,13 @@ class MemeTableViewController: UITableViewController {
     }
     
     func handleDeleteMeme(alertAction: UIAlertAction!) -> Void {
+        
         if let indexPath = deletePlanetIndexPath {
-            tableView.beginUpdates()
             
-            let object = UIApplication.sharedApplication().delegate
-            let appDelegate = object as! AppDelegate
-            appDelegate.memes.removeAtIndex(indexPath.row)   // Delete the element that corresponds to a selected cell
+            let meme = self.fetchedResultController.objectAtIndexPath(indexPath) as! Meme
+            sharedContext.deleteObject(meme)
+            CoreDataStackManager.sharedInstance().saveContext()
             
-            // The indexPath is wrapped in an array:  [indexPath]
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            deletePlanetIndexPath = nil
-            
-            tableView.endUpdates()
         }
     }
 
@@ -104,7 +159,7 @@ class MemeTableViewController: UITableViewController {
         deletePlanetIndexPath = nil
     }
     
-// MARK: - IBAction method
+    // MARK: - IBAction method
     @IBAction func addMeme(sender: AnyObject) {
         
         let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
