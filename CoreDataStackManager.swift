@@ -12,7 +12,7 @@ import Foundation
 import CoreData
 
 
-private let SQLITE_FILE_NAME = "meme.sqlite"
+private let SQLITE_FILE_NAME = "Meme.sqlite"
 
 class CoreDataStackManager {
     
